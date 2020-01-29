@@ -1,0 +1,7 @@
+
+commonLabels:
+  app: quotes-server
+
+resources:
+  - deployment.yaml
+  - service.yaml
