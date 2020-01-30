@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: sample-pipelinerun
+  namespace: s2i-test
+  labels:
+    app: quotes-server-ci
+spec:
+  pipelineRef:
+    name: sample-pipeline
+  resources:
+  - name: source
+    resourceRef:
+      name: source
+  - name: image
+    resourceRef:
+      name: image

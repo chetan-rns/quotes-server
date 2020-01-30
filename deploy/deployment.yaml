@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sample-deployment
+  labels:
+    app: quotes-server
 spec:
   selector:
     matchLabels:
@@ -10,10 +12,10 @@ spec:
   template:
     metadata:
       labels:
-        app: s2i
+        app: quotes-server-cd
     spec:
       containers:
         - name: hello-openshift
-          image: quay.io/cbanavik/test:latest
+          image: quay.io/cbanavik/quotes-server:latest
           ports:
             - containerPort: 8080
