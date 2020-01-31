@@ -6,11 +6,6 @@ metadata:
   labels:
     app: quotes-server-cd
 spec:
-  resources:
-    - name: source
-      type: git
-    - name: image
-      type: image
   tasks:
     - name: openshift-client
       taskRef:
@@ -19,6 +14,6 @@ spec:
       params:
         - name: ARGS
           value: 
-            - "apply"
-            - "-f"
-            -  "https://github.com/chetan-rns/quotes-server/blob/master/deploy/manifests.yaml"
+            - apply
+            - -f
+            - https://raw.githubusercontent.com/chetan-rns/quotes-server/master/deploy/manifests.yaml

@@ -7,10 +7,3 @@ metadata:
 spec:
   pipelineRef:
     name: deploy-pipeline
-  resources:
-  - name: image
-    resourceRef:
-      name: image
-  - name: source
-    resourceRef:
-      name: source
