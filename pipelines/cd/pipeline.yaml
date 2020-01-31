@@ -2,26 +2,23 @@ apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
   name: deploy-pipeline
-  spec:
-    resources:
+  namespace: s2i-test
+  labels:
+    app: quotes-server-cd
+spec:
+  resources:
     - name: source
       type: git
     - name: image
       type: image
-    tasks:
+  tasks:
     - name: openshift-client
       taskRef:
         name: openshift-client
-        resources:
-          inputs:
-          - name: source
-            resource: source
-          outputs:
-          - name: image
-            resource: image
+        kind: ClusterTask
       params:
         - name: ARGS
           value: 
-                - "apply"
-                - "-f"
-                -  
+            - "apply"
+            - "-f"
+            -  "https://github.com/chetan-rns/quotes-server/blob/master/deploy/manifests.yaml"

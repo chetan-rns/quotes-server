@@ -2,6 +2,8 @@ apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
   name: deploy-pipelinerun
+  labels:
+    app: quotes-server-cd
 spec:
   pipelineRef:
     name: deploy-pipeline

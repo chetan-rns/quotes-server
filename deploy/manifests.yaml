@@ -19,3 +19,22 @@ spec:
           image: quay.io/cbanavik/quotes-server:latest
           ports:
             - containerPort: 8080 
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-svc
+  labels:
+    app: quotes-server
+spec:
+  ports:
+  - name: 5000-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: quotes-server
+  sessionAffinity: None
+  type: ClusterIP

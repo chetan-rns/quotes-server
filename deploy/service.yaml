@@ -5,13 +5,12 @@ metadata:
   labels:
     app: quotes-server
 spec:
-  clusterIP: 172.30.227.230
   ports:
   - name: 5000-8080
     port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: s2i
+    app: quotes-server
   sessionAffinity: None
   type: ClusterIP
