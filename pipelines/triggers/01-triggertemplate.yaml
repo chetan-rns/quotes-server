@@ -1,0 +1,36 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: quotes-triggertemplate
+  namespace: s2i-test
+  labels:
+    app: quotes-server-ci
+spec:
+  params:
+    - name: gitrevision
+      description: The git revision
+      default: master
+    - name: gitrepositoryurl
+      description: The git repository url
+    - name: namespace
+      description: The namespace to create the resources
+    - name: contenttype
+      description: Content Type of payload
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1alpha1
+      kind: PipelineRun
+      metadata:
+        name: sample-pipelinerun-$(uid)
+        namespace: s2i-test
+        labels:
+          app: quotes-server-ci
+      spec:
+        pipelineRef:
+          name: sample-pipeline
+        resources:
+        - name: source
+          resourceRef:
+            name: source
+        - name: image
+          resourceRef:
+            name: image
