@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: quotes-started-listener
+  namespace: s2i-test
+  labels:
+    app: quotes-server-ci
+spec:
+  serviceAccountName: tekton-triggers-admin
+  triggers:
+    - binding:
+        name: quotes-pipelinebinding
+      template:
+        name: quotes-triggertemplate
