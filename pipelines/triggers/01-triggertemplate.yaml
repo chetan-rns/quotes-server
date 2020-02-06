@@ -20,7 +20,7 @@ spec:
     - apiVersion: tekton.dev/v1alpha1
       kind: PipelineRun
       metadata:
-        name: sample-pipelinerun
+        name: sample-pipelinerun-$(uid)
         namespace: s2i-test
         labels:
           app: quotes-server-ci

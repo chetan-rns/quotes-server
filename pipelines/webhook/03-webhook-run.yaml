@@ -2,6 +2,9 @@ apiVersion: tekton.dev/v1alpha1
 kind: TaskRun
 metadata:
   name: create-api-repo-webhook-run
+  namespace: s2i-test
+  labels:
+    app: quotes-server-ci  
 spec:
   taskRef:
     name: create-webhook
@@ -15,11 +18,11 @@ spec:
       value: "quotes-server"
     - name: GitHubSecretName
       value: webhook-secret
-    - name: GitHubAccessTokenKey
+    - name: GitHubAccessTokenKey  
       value: token
     - name: GitHubSecretStringKey
       value: secret
     - name: ExternalDomain
-      value: http://quotes-started-listener-s2i-test.apps.ci-ln-crnc3ib-d5d6b.origin-ci-int-aws.dev.rhcloud.com
+      value: http://quotes-started-listener-s2i-test.apps.ci-ln-3swzpn2-d5d6b.origin-ci-int-aws.dev.rhcloud.com
   timeout: 1000s
   serviceAccount: tekton-triggers-createwebhook

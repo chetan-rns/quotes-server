@@ -2,6 +2,9 @@ apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
   name: create-webhook
+  namespace: s2i-test
+  labels:
+    app: quotes-server-ci
 spec:
   volumes:
   - name: github-secret
@@ -19,7 +22,7 @@ spec:
       description: "The GitHub organization where the webhook will be created"
     - name: GitHubSecretName
       description: "The Secret name for GitHub access token. This is always mounted and must exist"
-    - name: GitHubAccessTokenKey
+    - name: GitHubAccessTokenKey  
       description: "The GitHub access token key name"
     - name: GitHubSecretStringKey
       description: "The GitHub secret string key name"
