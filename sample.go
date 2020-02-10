@@ -56,26 +56,27 @@ func GenerateTaskUsingV1alpha1() v1alpha1.Task {
 	inputs := v1alpha1.Inputs{
 		Params: params,
 	}
+	env := []corev1.EnvVar{
+		corev1.EnvVar{
+			Name: "GITHUB_TOKEN",
+			ValueFrom: &corev1.EnvVarSource{
+				SecretKeyRef: &corev1.SecretKeySelector{
+					LocalObjectReference: corev1.LocalObjectReference{
+						Name: "github-auth",
+					},
+					Key: "token",
+				},
+			},
+		},
+	}
 	steps := []v1alpha2.Step{
 		v1alpha1.Step{
 			Container: corev1.Container{
 				Name:       "start-status",
 				Image:      "quay.io/kmcdermo/github-tool:latest",
 				WorkingDir: "/workspace/source",
-				Env: []corev1.EnvVar{
-					corev1.EnvVar{
-						Name: "GITHUB_TOKEN",
-						ValueFrom: &corev1.EnvVarSource{
-							SecretKeyRef: &corev1.SecretKeySelector{
-								LocalObjectReference: corev1.LocalObjectReference{
-									Name: "github-auth",
-								},
-								Key: "token",
-							},
-						},
-					},
-				},
-				Command: []string{"github-tools"},
+				Env:        env,
+				Command:    []string{"github-tools"},
 				Args: []string{
 					"create-status",
 					"--repo",
